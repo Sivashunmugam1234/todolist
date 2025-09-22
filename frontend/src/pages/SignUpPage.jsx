@@ -1,15 +1,21 @@
 import { useRef } from "react";
-
+import apiClient from "../api";
+import { useNavigate } from "react-router-dom";
 export default function SignUpPage() {
   const usernameRef = useRef(null);
   const passwordRef = useRef(null);
   const nickNameRef = useRef(null);
+  const navigate=useNavigate();
 
-  const submit = (e) => {
-    e.preventDefault(); // Prevent form from reloading the page
-    console.log("Username:", usernameRef.current.value);
-    console.log("Password:", passwordRef.current.value);
-    console.log("Nickname:", nickNameRef.current.value);
+  const submit =async (e) => {
+    e.preventDefault();
+    let username=usernameRef.current.value;
+    let password=passwordRef.current.value;
+    let nickname=nickNameRef.current.value;
+    const resposnse=await apiClient.post('/auth/signup',{username,nickname,password})
+     console.log(resposnse);
+     navigate('/todolist');
+     
   };
 
   return (

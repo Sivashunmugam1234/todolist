@@ -6,15 +6,18 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
-import App from './App'; 
+// import App from './App'; 
 // import HomePage from './pages/HomePage';
 // import AboutPage from './pages/AboutPage';
 import './index.css';
+// import LoginPage from './pages/LoginPage';
+import ToDoList from './pages/ToDoList';
+import AuthLayout from './pages/AuthLayout';
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />,
+    element: <AuthLayout/>,
     // children: [
     //   {
     //     path: "/",
@@ -26,6 +29,10 @@ const router = createBrowserRouter([
     //   },
     // ],
   },
+  {
+    path:"/todolist",
+    element:<ToDoList/>
+  }
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

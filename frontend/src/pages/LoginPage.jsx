@@ -1,11 +1,20 @@
 import { useRef } from "react";
+import apiClient from "../api";
+import { useNavigate } from "react-router-dom";
 
 export default function LoginPage() {
   const usernameRef = useRef(null);
   const passwordRef = useRef(null);
+  const navigate=useNavigate();
 
-  const submit = (e) => {
+  const submit =async (e) => {
     e.preventDefault();
+    let username= usernameRef.current.value;
+    let password= passwordRef.current.value;
+         const response = await apiClient.post('/auth/login', { username, password });
+      const token = response.data.token;
+      localStorage.setItem('authToken', token);
+      navigate('/todolist')
     console.log("Username:", usernameRef.current.value);
     console.log("Password:", passwordRef.current.value);
   };
