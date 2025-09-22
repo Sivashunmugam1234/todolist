@@ -4,20 +4,15 @@ const db = require('./db');
 
 const app = express();
 const PORT = 3000;
+const userRoute= require('./auth/route');
+app.use(express.json());
+
 
 app.get('/', (req, res) => {
   res.send('Hello World!');
 });
+app.use('/auth', userRoute);
 
-app.get('/users', async (req, res) => {
-  try {
-    const { rows } = await db.query('SELECT * FROM users');
-    res.json(rows);
-  } catch (err) {
-    console.error(err.message);
-    res.status(500).send('Server error');
-  }
-});
 
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
